@@ -1,5 +1,6 @@
 package part03;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -23,8 +24,11 @@ public class ObjectExercise {
      * @return A list of names of the people in the list.
      */
     public List<String> getNames(List<Person> people) {
-        // hint: you can call the getName() method of each Person on the list
-        return null;
+        List<String> names = new ArrayList<>();
+        for (Person person : people) {
+            names.add(person.getName());
+        }
+        return names;
     }
 
     /**
@@ -38,9 +42,17 @@ public class ObjectExercise {
      * @return The oldest person in the list.
      */
     public Person getOldest(List<Person> people) {
-        // hint: you can call the getAge() method of each Person on the list and compare
-        // the ages to find the oldest person
-        return null;
+        if (people.isEmpty()) {
+            return null;
+        }
+
+        Person oldest = people.get(0);
+        for (Person person : people) {
+            if (person.getAge() > oldest.getAge()) {
+                oldest = person;
+            }
+        }
+        return oldest;
     }
 
     /**
@@ -65,7 +77,29 @@ public class ObjectExercise {
      * @return A formatted string representing the names of people in the list.
      */
     public String generateNamesString(List<Person> people) {
-        // TODO: implement this method
-        return null;
+        int size = people.size();
+
+        if (size == 0) {
+            return "";
+        }
+
+        if (size == 1) {
+            return people.get(0).getName();
+        }
+
+        if (size == 2) {
+            return people.get(0).getName() + " and "
+                    + people.get(1).getName();
+        }
+
+        if (size == 3) {
+            return people.get(0).getName() + ", "
+                    + people.get(1).getName() + " and "
+                    + people.get(2).getName();
+        }
+
+        return people.get(0).getName() + ", "
+                + people.get(1).getName() + " and "
+                + (size - 2) + " others";
     }
 }
